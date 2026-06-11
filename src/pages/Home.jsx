@@ -157,7 +157,7 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden xl:block w-full max-w-5xl mx-auto mt-12 relative z-20"
+            className="hidden lg:block w-full max-w-5xl mx-auto mt-12 relative z-20"
           >
             <div className="flex flex-col lg:flex-row items-center bg-white rounded-3xl lg:rounded-full shadow-2xl border border-white/40 p-2 lg:p-0 backdrop-blur-sm bg-white/95">
               <div className="flex flex-col lg:flex-row w-full divide-y lg:divide-y-0 lg:divide-x divide-slate-100 items-center">
@@ -254,7 +254,7 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="xl:hidden w-full max-w-sm mx-auto mt-8 relative z-20 px-4"
+            className="lg:hidden w-full max-w-sm mx-auto mt-8 relative z-20 px-4"
           >
             <button
               onClick={() => navigate('/properties')}
