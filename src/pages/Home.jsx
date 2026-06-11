@@ -157,12 +157,12 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden lg:block w-full max-w-5xl mx-auto mt-12 relative z-20"
+            className="hidden md:block w-full max-w-5xl mx-auto mt-12 relative z-20"
           >
-            <div className="flex flex-col lg:flex-row items-center bg-white rounded-3xl lg:rounded-full shadow-2xl border border-white/40 p-2 lg:p-0 backdrop-blur-sm bg-white/95">
-              <div className="flex flex-col lg:flex-row w-full divide-y lg:divide-y-0 lg:divide-x divide-slate-100 items-center">
+            <div className="flex flex-col md:flex-row items-center bg-white rounded-3xl md:rounded-full shadow-2xl border border-white/40 p-2 md:p-0 backdrop-blur-sm bg-white/95">
+               <div className="flex flex-col md:flex-row w-full divide-y md:divide-y-0 md:divide-x divide-slate-100 items-center">
                 
-                <div className="flex-1 w-full px-4 lg:px-8 py-3 lg:py-4 rounded-t-2xl lg:rounded-none lg:rounded-l-full hover:bg-slate-50 transition-colors duration-300">
+                <div className="flex-1 w-full px-4 md:px-8 py-3 md:py-4 rounded-t-2xl md:rounded-none md:rounded-l-full hover:bg-slate-50 transition-colors duration-300">
                   <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 text-left">ΚΩΔΙΚΟΣ ΑΚΙΝΗΤΟΥ</label>
                   <input 
                     type="text" 
@@ -173,7 +173,7 @@ const Home = () => {
                   />
                 </div>
 
-                <div className="flex-1 w-full px-4 lg:px-6 py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
                   <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Τυπος</label>
                   <CustomSelect 
                     value={filterType}
@@ -190,7 +190,7 @@ const Home = () => {
                   />
                 </div>
 
-                <div className="flex-1 w-full px-4 lg:px-6 py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
                   <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Τιμη</label>
                   <CustomSelect 
                     value={maxPrice}
@@ -206,7 +206,7 @@ const Home = () => {
                   />
                 </div>
 
-                <div className="flex-1 w-full px-4 lg:px-6 py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
                   <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Δωματια</label>
                   <CustomSelect 
                     value={minBedrooms}
@@ -221,7 +221,7 @@ const Home = () => {
                   />
                 </div>
 
-                <div className="flex-1 w-full px-4 lg:px-6 py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
                   <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Εμβαδον</label>
                   <CustomSelect 
                     value={sqftRange}
@@ -238,10 +238,10 @@ const Home = () => {
                 </div>
               </div>
               
-              <div className="w-full lg:w-auto p-2 lg:p-2 lg:pl-0 flex justify-center lg:justify-end shrink-0">
+              <div className="w-full md:w-auto p-2 md:p-2 md:pl-0 flex justify-center md:justify-end shrink-0">
                 <button 
                   onClick={handleSearch}
-                  className="bg-black hover:bg-gold text-white hover:text-black font-semibold px-8 py-3 lg:py-4 rounded-2xl lg:rounded-full transition-all duration-300 w-full lg:w-auto whitespace-nowrap lg:h-[60px] flex items-center justify-center shadow-lg hover:shadow-xl"
+                  className="bg-black hover:bg-gold text-white hover:text-black font-semibold px-8 py-3 md:py-4 rounded-2xl md:rounded-full transition-all duration-300 w-full md:w-auto whitespace-nowrap md:h-[60px] flex items-center justify-center shadow-lg hover:shadow-xl"
                 >
                   Αναζήτηση
                 </button>
@@ -254,7 +254,7 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden w-full max-w-sm mx-auto mt-8 relative z-20 px-4"
+            className="md:hidden w-full max-w-sm mx-auto mt-8 relative z-20 px-4"
           >
             <button
               onClick={() => navigate('/properties')}
