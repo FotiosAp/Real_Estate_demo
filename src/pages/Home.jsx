@@ -159,23 +159,24 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="hidden md:block w-full max-w-5xl mx-auto mt-12 relative z-20"
           >
-            <div className="flex flex-col md:flex-row items-center bg-white rounded-3xl md:rounded-full shadow-2xl border border-white/40 p-2 md:p-0 backdrop-blur-sm bg-white/95">
-               <div className="flex flex-col md:flex-row w-full divide-y md:divide-y-0 md:divide-x divide-slate-100 items-center">
+            <div className="flex flex-col md:flex-row items-center bg-white rounded-3xl md:rounded-full shadow-2xl border border-white/40 p-2 md:p-0 backdrop-blur-sm bg-white/95 overflow-hidden">
+               <div className="flex flex-col md:flex-row w-full divide-y md:divide-y-0 md:divide-x divide-slate-100 items-center min-w-0">
                 
-                <div className="flex-1 w-full px-4 md:px-8 py-3 md:py-4 rounded-t-2xl md:rounded-none md:rounded-l-full hover:bg-slate-50 transition-colors duration-300">
-                  <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 text-left">ΚΩΔΙΚΟΣ ΑΚΙΝΗΤΟΥ</label>
+                <div className="flex-1 min-w-0 w-full px-4 md:px-3 lg:px-6 xl:px-8 py-3 md:py-3 lg:py-4 rounded-t-2xl md:rounded-none md:rounded-l-full hover:bg-slate-50 transition-colors duration-300">
+                  <label className="block text-[10px] md:text-[8px] lg:text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 text-left truncate">ΚΩΔΙΚΟΣ ΑΚΙΝΗΤΟΥ</label>
                   <input 
                     type="text" 
                     placeholder="Πληκτρολογήστε..." 
-                    className="w-full bg-transparent border-none outline-none text-slate-900 placeholder-slate-500 font-medium text-sm lg:text-base p-0"
+                    className="w-full bg-transparent border-none outline-none text-slate-900 placeholder-slate-500 font-medium text-sm md:text-xs lg:text-sm xl:text-base p-0 truncate"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
 
-                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
-                  <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Τυπος</label>
-                  <CustomSelect 
+                <div className="flex-1 min-w-0 w-full px-4 md:px-3 lg:px-6 py-3 md:py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                  <label className="block text-[10px] md:text-[8px] lg:text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 truncate">Τυπος</label>
+                  <div className="text-sm md:text-xs lg:text-sm xl:text-base">
+                    <CustomSelect 
                     value={filterType}
                     onChange={setFilterType}
                     placeholder="Όλοι"
@@ -187,12 +188,14 @@ const Home = () => {
                       { value: 'Loft', label: 'Loft' },
                       { value: 'Studio', label: 'Studio' }
                     ]}
-                  />
+                    />
+                  </div>
                 </div>
 
-                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
-                  <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Τιμη</label>
-                  <CustomSelect 
+                <div className="flex-1 min-w-0 w-full px-4 md:px-3 lg:px-6 py-3 md:py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                  <label className="block text-[10px] md:text-[8px] lg:text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 truncate">Τιμη</label>
+                  <div className="text-sm md:text-xs lg:text-sm xl:text-base">
+                    <CustomSelect 
                     value={maxPrice}
                     onChange={setMaxPrice}
                     placeholder="Οποιαδήποτε"
@@ -203,12 +206,14 @@ const Home = () => {
                       { value: '1000000', label: 'Έως 1.000.000€' },
                       { value: '1500000', label: 'Έως 1.500.000€' }
                     ]}
-                  />
+                    />
+                  </div>
                 </div>
 
-                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
-                  <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Δωματια</label>
-                  <CustomSelect 
+                <div className="flex-1 min-w-0 w-full px-4 md:px-3 lg:px-6 py-3 md:py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                  <label className="block text-[10px] md:text-[8px] lg:text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 truncate">Δωματια</label>
+                  <div className="text-sm md:text-xs lg:text-sm xl:text-base">
+                    <CustomSelect 
                     value={minBedrooms}
                     onChange={setMinBedrooms}
                     placeholder="Οποιοδήποτε"
@@ -218,12 +223,14 @@ const Home = () => {
                       { value: '3', label: '3+' },
                       { value: '4', label: '4+' }
                     ]}
-                  />
+                    />
+                  </div>
                 </div>
 
-                <div className="flex-1 w-full px-4 md:px-6 py-3 md:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
-                  <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Εμβαδον</label>
-                  <CustomSelect 
+                <div className="flex-1 min-w-0 w-full px-4 md:px-3 lg:px-6 py-3 md:py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300 text-left">
+                  <label className="block text-[10px] md:text-[8px] lg:text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 truncate">Εμβαδον</label>
+                  <div className="text-sm md:text-xs lg:text-sm xl:text-base">
+                    <CustomSelect 
                     value={sqftRange}
                     onChange={setSqftRange}
                     placeholder="Οποιοδήποτε"
@@ -234,14 +241,15 @@ const Home = () => {
                       { value: '150-200', label: '150 - 200 τ.μ.' },
                       { value: '200+', label: '200+ τ.μ.' }
                     ]}
-                  />
+                    />
+                  </div>
                 </div>
               </div>
               
-              <div className="w-full md:w-auto p-2 md:p-2 md:pl-0 flex justify-center md:justify-end shrink-0">
+              <div className="w-full md:w-auto p-2 md:p-1 lg:p-2 flex justify-center md:justify-end shrink-0">
                 <button 
                   onClick={handleSearch}
-                  className="bg-black hover:bg-gold text-white hover:text-black font-semibold px-8 py-3 md:py-4 rounded-2xl md:rounded-full transition-all duration-300 w-full md:w-auto whitespace-nowrap md:h-[60px] flex items-center justify-center shadow-lg hover:shadow-xl"
+                  className="bg-black hover:bg-gold text-white hover:text-black font-semibold px-8 md:px-4 lg:px-6 xl:px-8 py-3 md:py-3 lg:py-4 rounded-2xl md:rounded-full transition-all duration-300 w-full md:w-auto whitespace-nowrap md:h-[48px] lg:h-[60px] flex items-center justify-center shadow-lg hover:shadow-xl text-sm md:text-xs lg:text-sm xl:text-base"
                 >
                   Αναζήτηση
                 </button>
