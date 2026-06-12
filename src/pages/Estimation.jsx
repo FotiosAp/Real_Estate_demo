@@ -23,6 +23,12 @@ const Estimation = () => {
   }, [navType]);
 
   const [step, setStep] = useState(1);
+
+  // Scroll to top on every step change (especially useful for mobile to see the green tick)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
   const [formData, setFormData] = useState({
     propertyType: '',
     location: '',

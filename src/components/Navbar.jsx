@@ -105,12 +105,6 @@ const Navbar = () => {
                 {item.name}
               </button>
             ))}
-            <button 
-              onClick={() => handleNavClick('contact')}
-              className="mt-8 px-8 py-4 rounded-full font-medium transition-all duration-500 bg-black text-white hover:bg-gold shadow-xl w-full text-center"
-            >
-              Εκδήλωση Ενδιαφέροντος
-            </button>
           </motion.div>
         )}
       </AnimatePresence>
