@@ -266,9 +266,16 @@ const Home = () => {
           >
             <button
               onClick={() => navigate('/properties')}
-              className="w-full bg-white text-slate-900 font-bold py-4 rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.12)] active:scale-95 transition-transform"
+              className="w-full bg-white/95 backdrop-blur-md px-6 py-4 rounded-full flex items-center shadow-[0_8px_30px_rgb(0,0,0,0.12)] active:scale-95 transition-transform border border-white/40"
             >
-              <span>Βρείτε το ιδανικό ακίνητο για εσάς</span>
+              <Search className="h-5 w-5 text-slate-400 mr-4 shrink-0" />
+              <div className="flex flex-col items-start flex-1 text-left">
+                <span className="text-slate-900 font-bold text-[15px] leading-tight">Αναζήτηση</span>
+                <span className="text-slate-500 text-[11px] font-medium mt-0.5">Περιοχή, Τιμή, Εμβαδόν...</span>
+              </div>
+              <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center shrink-0 ml-2">
+                <ArrowRight className="h-4 w-4 text-slate-600" />
+              </div>
             </button>
           </motion.div>
         </motion.div>
