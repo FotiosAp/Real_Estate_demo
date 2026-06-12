@@ -299,8 +299,8 @@ const Home = () => {
       {/* Quick Actions Section */}
       <section className="bg-slate-50 pt-20 pb-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-6 lg:gap-8">
-            <Link to="/properties" className="group relative w-full md:w-1/2 rounded-3xl overflow-hidden h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            <Link to="/properties" className="group relative w-full lg:w-1/2 rounded-3xl overflow-hidden h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500 z-10"></div>
               <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Εύρεση Ακινήτου" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
               <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
@@ -313,7 +313,7 @@ const Home = () => {
               </div>
             </Link>
             
-            <Link to="/estimation" className="group relative w-full md:w-1/2 rounded-3xl overflow-hidden h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
+            <Link to="/estimation" className="group relative w-full lg:w-1/2 rounded-3xl overflow-hidden h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500 z-10"></div>
               <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ανάθεση Ακινήτου" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
               <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
@@ -347,7 +347,7 @@ const Home = () => {
                 alt="Συνεργάτης και πελάτης δίνουν τα χέρια" 
                 className="relative z-10 w-full h-auto rounded-3xl shadow-xl object-cover"
               />
-              <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-3xl shadow-xl z-20 hidden md:block border border-slate-100">
+              <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-3xl shadow-xl z-20 hidden lg:block border border-slate-100">
                 <div className="text-4xl font-bold text-slate-900 mb-1">10+</div>
                 <div className="text-slate-500 font-medium">Χρόνια Εμπειρίας</div>
               </div>
@@ -460,8 +460,8 @@ const Home = () => {
             <Link to="/property" className="group relative rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
               <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Αθήνα Κέντρο" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end text-center md:text-left">
-                <div className="mb-4 md:mb-0">
+              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
+                <div className="mb-4 lg:mb-0">
                   <h3 className="text-2xl font-serif font-bold text-white mb-1">Αθήνα Κέντρο</h3>
                   <p className="text-gold font-medium text-sm">450+ Ακίνητα</p>
                 </div>
@@ -474,8 +474,8 @@ const Home = () => {
             <Link to="/property" className="group relative rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
               <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Βόρεια Προάστια" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end text-center md:text-left">
-                <div className="mb-4 md:mb-0">
+              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
+                <div className="mb-4 lg:mb-0">
                   <h3 className="text-2xl font-serif font-bold text-white mb-1">Βόρεια Προάστια</h3>
                   <p className="text-gold font-medium text-sm">210+ Ακίνητα</p>
                 </div>
@@ -488,8 +488,8 @@ const Home = () => {
             <Link to="/property" className="group relative rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
               <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Νότια Προάστια" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end text-center md:text-left">
-                <div className="mb-4 md:mb-0">
+              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
+                <div className="mb-4 lg:mb-0">
                   <h3 className="text-2xl font-serif font-bold text-white mb-1">Νότια Προάστια</h3>
                   <p className="text-gold font-medium text-sm">320+ Ακίνητα</p>
                 </div>
@@ -507,8 +507,8 @@ const Home = () => {
       {/* Insights Section */}
       <section className="py-24 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end mb-16 text-center md:text-left">
-            <div className="mb-6 md:mb-0">
+          <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end mb-16 text-center lg:text-left">
+            <div className="mb-6 lg:mb-0">
               <span className="text-gold font-bold tracking-widest uppercase text-sm mb-2 block">Insights</span>
               <h2 className="text-4xl font-serif font-semibold text-slate-900">Νέα της Αγοράς</h2>
             </div>
@@ -523,7 +523,7 @@ const Home = () => {
               <div className="relative h-60 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 1" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
               </div>
-              <div className="p-8 flex-grow flex flex-col text-center md:text-left items-center md:items-start">
+              <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
                 <p className="text-gold font-medium text-sm mb-3">Συμβουλές</p>
                 <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Πώς να αυξήσετε την αξία του ακινήτου σας πριν την πώληση</h3>
                 <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
@@ -537,7 +537,7 @@ const Home = () => {
               <div className="relative h-60 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 2" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
               </div>
-              <div className="p-8 flex-grow flex flex-col text-center md:text-left items-center md:items-start">
+              <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
                 <p className="text-gold font-medium text-sm mb-3">Αγορά Ακινήτων</p>
                 <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Τάσεις της αγοράς για το 2026: Τι πρέπει να γνωρίζετε</h3>
                 <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
@@ -551,7 +551,7 @@ const Home = () => {
               <div className="relative h-60 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1626178793926-22b28830aa30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 3" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
               </div>
-              <div className="p-8 flex-grow flex flex-col text-center md:text-left items-center md:items-start">
+              <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
                 <p className="text-gold font-medium text-sm mb-3">Νομοθεσία</p>
                 <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Όλες οι αλλαγές στη φορολογία μεταβίβασης ακινήτων</h3>
                 <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
