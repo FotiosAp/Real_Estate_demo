@@ -14,14 +14,14 @@ const Properties = () => {
   const searchParams = new URLSearchParams(location.search);
   const initialSearch = searchParams.get('search') || '';
   const initialType = searchParams.get('type') || '';
-  const initialMaxPrice = searchParams.get('maxPrice') || '';
+  const initialPriceRange = searchParams.get('priceRange') || '';
   const initialMinBeds = searchParams.get('minBeds') || '';
   const initialSqft = searchParams.get('sqft') || '';
 
   const [viewMode, setViewMode] = useState('grid');
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [filterType, setFilterType] = useState(initialType);
-  const [maxPrice, setMaxPrice] = useState(initialMaxPrice);
+  const [priceRange, setPriceRange] = useState(initialPriceRange);
   const [minBedrooms, setMinBedrooms] = useState(initialMinBeds);
   const [sqftRange, setSqftRange] = useState(initialSqft);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
@@ -29,7 +29,7 @@ const Properties = () => {
   const [appliedFilters, setAppliedFilters] = useState({
     searchTerm: initialSearch,
     filterType: initialType,
-    maxPrice: initialMaxPrice,
+    priceRange: initialPriceRange,
     minBedrooms: initialMinBeds,
     sqftRange: initialSqft
   });
@@ -40,13 +40,13 @@ const Properties = () => {
     const updatedFilters = {
       searchTerm: params.get('search') || '',
       filterType: params.get('type') || '',
-      maxPrice: params.get('maxPrice') || '',
+      priceRange: params.get('priceRange') || '',
       minBedrooms: params.get('minBeds') || '',
       sqftRange: params.get('sqft') || ''
     };
     setSearchTerm(updatedFilters.searchTerm);
     setFilterType(updatedFilters.filterType);
-    setMaxPrice(updatedFilters.maxPrice);
+    setPriceRange(updatedFilters.priceRange);
     setMinBedrooms(updatedFilters.minBedrooms);
     setSqftRange(updatedFilters.sqftRange);
     setAppliedFilters(updatedFilters);
@@ -74,7 +74,17 @@ const Properties = () => {
     );
 
     const matchesType = appliedFilters.filterType === '' || p.type === appliedFilters.filterType;
-    const matchesPrice = appliedFilters.maxPrice === '' || p.price <= parseInt(appliedFilters.maxPrice);
+    
+    let matchesPrice = true;
+    if (appliedFilters.priceRange) {
+      if (appliedFilters.priceRange.includes('-')) {
+        const [min, max] = appliedFilters.priceRange.split('-');
+        matchesPrice = p.price >= parseInt(min) && p.price <= parseInt(max);
+      } else if (appliedFilters.priceRange.includes('+')) {
+        matchesPrice = p.price >= parseInt(appliedFilters.priceRange);
+      }
+    }
+
     const matchesBeds = appliedFilters.minBedrooms === '' || p.bedrooms >= parseInt(appliedFilters.minBedrooms);
     
     let matchesSqft = true;
@@ -179,15 +189,14 @@ const Properties = () => {
               <div className="flex-1 w-full px-4 lg:px-6 py-3 lg:py-4 relative hover:bg-slate-50 transition-colors duration-300">
                 <label className="block text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1">Τιμη</label>
                 <CustomSelect 
-                  value={maxPrice}
-                  onChange={setMaxPrice}
+                  value={priceRange}
+                  onChange={setPriceRange}
                   placeholder="Οποιαδήποτε"
                   options={[
-                    { value: '300000', label: 'Έως 300.000€' },
-                    { value: '500000', label: 'Έως 500.000€' },
-                    { value: '800000', label: 'Έως 800.000€' },
-                    { value: '1000000', label: 'Έως 1.000.000€' },
-                    { value: '1500000', label: 'Έως 1.500.000€' }
+                    { value: '0-100000', label: '0 - 100.000€' },
+                    { value: '100000-200000', label: '100.000 - 200.000€' },
+                    { value: '200000-300000', label: '200.000 - 300.000€' },
+                    { value: '300000+', label: '300.000€+' }
                   ]}
                 />
               </div>
@@ -199,10 +208,10 @@ const Properties = () => {
                   onChange={setMinBedrooms}
                   placeholder="Οποιοδήποτε"
                   options={[
-                    { value: '1', label: '1+' },
-                    { value: '2', label: '2+' },
-                    { value: '3', label: '3+' },
-                    { value: '4', label: '4+' }
+                    { value: '1', label: '1' },
+                    { value: '2', label: '2' },
+                    { value: '3', label: '3' },
+                    { value: '4', label: '4' }
                   ]}
                 />
               </div>
@@ -226,7 +235,7 @@ const Properties = () => {
             <div className="w-full lg:w-auto p-2 lg:p-2 lg:pl-0 flex flex-row lg:flex-row justify-center lg:justify-end shrink-0 gap-2">
               <button 
                 onClick={() => {
-                  setAppliedFilters({ searchTerm, filterType, maxPrice, minBedrooms, sqftRange });
+                  setAppliedFilters({ searchTerm, filterType, priceRange, minBedrooms, sqftRange });
                   setIsMobileFiltersOpen(false);
                 }}
                 className="bg-black hover:bg-gold text-white font-semibold px-4 lg:px-6 py-3 lg:py-4 rounded-2xl lg:rounded-full transition-all w-1/2 lg:w-auto whitespace-nowrap lg:h-[60px] flex items-center justify-center"
@@ -235,8 +244,8 @@ const Properties = () => {
               </button>
               <button 
                 onClick={() => { 
-                  setFilterType(''); setMaxPrice(''); setMinBedrooms(''); setSqftRange(''); setSearchTerm(''); 
-                  setAppliedFilters({ searchTerm: '', filterType: '', maxPrice: '', minBedrooms: '', sqftRange: '' });
+                  setFilterType(''); setPriceRange(''); setMinBedrooms(''); setSqftRange(''); setSearchTerm(''); 
+                  setAppliedFilters({ searchTerm: '', filterType: '', priceRange: '', minBedrooms: '', sqftRange: '' });
                 }}
                 className="bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-black font-semibold px-4 lg:px-6 py-3 lg:py-4 rounded-2xl lg:rounded-full transition-all w-1/2 lg:w-auto whitespace-nowrap lg:h-[60px] flex items-center justify-center"
               >

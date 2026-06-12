@@ -5,6 +5,17 @@ import { Search, Home as HomeIcon, Shield, TrendingUp, MapPin, Phone, Mail, Cloc
 import { useAppContext } from '../context/AppContext';
 import CustomSelect from '../components/CustomSelect';
 
+const BackgroundBlobs = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    {/* Large architectural circles */}
+    <div className="absolute top-[-100px] left-[-100px] w-[500px] h-[500px] rounded-full border-2 border-slate-300/90" />
+    <div className="absolute top-[50px] left-[-50px] w-[350px] h-[350px] rounded-full border-[4px] border-[#d4af37]/50" />
+    
+    {/* Watermark Icon */}
+    <Building2 className="absolute bottom-[-100px] right-[-100px] w-[500px] h-[500px] text-slate-200/90 transform -rotate-6" strokeWidth={1} />
+  </div>
+);
+
 const ContactBackground = () => {
   const images = [
     "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
@@ -53,17 +64,21 @@ const Home = () => {
   
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [priceRange, setPriceRange] = useState('');
   const [minBedrooms, setMinBedrooms] = useState('');
   const [sqftRange, setSqftRange] = useState('');
   
   const navigate = useNavigate();
   
   const handleSearch = () => {
+    if (!searchTerm && !filterType && !priceRange && !minBedrooms && !sqftRange) {
+      return;
+    }
+    
     const params = new URLSearchParams();
     if (searchTerm) params.append('search', searchTerm);
     if (filterType) params.append('type', filterType);
-    if (maxPrice) params.append('maxPrice', maxPrice);
+    if (priceRange) params.append('priceRange', priceRange);
     if (minBedrooms) params.append('minBeds', minBedrooms);
     if (sqftRange) params.append('sqft', sqftRange);
     
@@ -107,7 +122,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100svh] h-[100svh] flex items-center justify-center overflow-hidden">
         
         <motion.div className="absolute inset-0 z-0 bg-black">
           <AnimatePresence>
@@ -127,7 +142,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/60"></div>
         </motion.div>
         
-        <motion.div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+        <motion.div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-0 pb-16 md:pb-0">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -155,7 +170,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="hidden md:block w-full max-w-5xl mx-auto mt-12 relative z-20"
           >
-            <div className="flex flex-col md:flex-row items-center bg-white rounded-3xl md:rounded-full shadow-2xl border border-white/40 p-2 md:p-0 backdrop-blur-sm bg-white/95 overflow-hidden">
+            <div className="flex flex-col md:flex-row items-center bg-white rounded-3xl md:rounded-full shadow-2xl border border-white/40 p-2 md:p-0 backdrop-blur-sm bg-white/95">
                <div className="flex flex-col md:flex-row w-full divide-y md:divide-y-0 md:divide-x divide-slate-100 items-center min-w-0">
                 
                 <div className="flex-1 min-w-0 w-full px-4 md:px-3 lg:px-6 xl:px-8 py-3 md:py-3 lg:py-4 rounded-t-2xl md:rounded-none md:rounded-l-full hover:bg-slate-50 transition-colors duration-300">
@@ -192,15 +207,14 @@ const Home = () => {
                   <label className="block text-[10px] md:text-[8px] lg:text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-1 truncate">Τιμη</label>
                   <div className="text-sm md:text-xs lg:text-sm xl:text-base">
                     <CustomSelect 
-                    value={maxPrice}
-                    onChange={setMaxPrice}
+                    value={priceRange}
+                    onChange={setPriceRange}
                     placeholder="Οποιαδήποτε"
                     options={[
-                      { value: '300000', label: 'Έως 300.000€' },
-                      { value: '500000', label: 'Έως 500.000€' },
-                      { value: '800000', label: 'Έως 800.000€' },
-                      { value: '1000000', label: 'Έως 1.000.000€' },
-                      { value: '1500000', label: 'Έως 1.500.000€' }
+                      { value: '0-100000', label: '0 - 100.000€' },
+                      { value: '100000-200000', label: '100.000 - 200.000€' },
+                      { value: '200000-300000', label: '200.000 - 300.000€' },
+                      { value: '300000+', label: '300.000€+' }
                     ]}
                     />
                   </div>
@@ -214,10 +228,10 @@ const Home = () => {
                     onChange={setMinBedrooms}
                     placeholder="Οποιοδήποτε"
                     options={[
-                      { value: '1', label: '1+' },
-                      { value: '2', label: '2+' },
-                      { value: '3', label: '3+' },
-                      { value: '4', label: '4+' }
+                      { value: '1', label: '1' },
+                      { value: '2', label: '2' },
+                      { value: '3', label: '3' },
+                      { value: '4', label: '4' }
                     ]}
                     />
                   </div>
@@ -265,14 +279,11 @@ const Home = () => {
               <input
                 type="text"
                 placeholder="Αναζήτηση (Περιοχή, Τιμή...)"
-                className="w-full bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 font-medium text-[15px] py-3"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') navigate('/properties');
-                }}
+                className="w-full bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 font-medium text-[15px] py-3 cursor-text"
               />
               <button 
-                onClick={() => navigate('/properties')}
-                className="w-10 h-10 rounded-full bg-black flex items-center justify-center shrink-0 ml-2 hover:bg-gold transition-colors shadow-md"
+                type="button"
+                className="w-10 h-10 rounded-full bg-black flex items-center justify-center shrink-0 ml-2 shadow-md cursor-default"
               >
                 <ArrowRight className="h-4 w-4 text-white" />
               </button>
@@ -285,7 +296,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10"
+          className="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10"
         >
           <span className="text-white/60 text-xs tracking-[0.2em] uppercase mb-3 font-semibold">Scroll</span>
           <motion.div 
@@ -297,41 +308,59 @@ const Home = () => {
       </section>
 
       {/* Quick Actions Section */}
-      <section className="bg-slate-50 pt-20 pb-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-slate-50 pt-20 pb-4 relative overflow-hidden">
+        <BackgroundBlobs />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-            <Link to="/properties" className="group relative w-full lg:w-1/2 rounded-3xl overflow-hidden h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500 z-10"></div>
-              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Εύρεση Ακινήτου" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
-                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 drop-shadow-lg transform group-hover:-translate-y-2 transition-transform duration-500">Εύρεση Ακινήτου</h3>
-                <p className="text-white/90 text-lg md:text-xl font-medium mb-8 max-w-sm drop-shadow-md transform group-hover:-translate-y-2 transition-transform duration-500 delay-75 opacity-0 group-hover:opacity-100">Ανακαλύψτε το ιδανικό ακίνητο μέσα από χιλιάδες επιλογές.</p>
-                <div className="bg-white text-slate-900 group-hover:bg-gold group-hover:text-white px-8 py-3 rounded-full font-semibold transition-colors duration-300 transform group-hover:-translate-y-2 shadow-xl flex items-center gap-2">
-                  <span>Δείτε τα ακίνητα</span>
-                  <Search className="h-4 w-4" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8 }}
+              className="w-full lg:w-1/2"
+            >
+              <Link to="/properties" className="group relative block w-full rounded-3xl overflow-hidden h-64 md:h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500 z-10"></div>
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Εύρεση Ακινήτου" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
+                  <h3 className="text-2xl md:text-4xl font-serif font-bold text-white mb-2 md:mb-4 drop-shadow-lg transform group-hover:-translate-y-2 transition-transform duration-500">Εύρεση Ακινήτου</h3>
+                  <p className="text-white/90 text-sm md:text-xl font-medium mb-4 md:mb-8 max-w-sm drop-shadow-md transform group-hover:-translate-y-2 transition-transform duration-500 delay-75 opacity-0 group-hover:opacity-100">Ανακαλύψτε το ιδανικό ακίνητο μέσα από χιλιάδες επιλογές.</p>
+                  <div className="bg-white text-slate-900 group-hover:bg-gold group-hover:text-white px-6 md:px-8 py-2 md:py-3 rounded-full text-sm md:text-base font-semibold transition-colors duration-300 transform group-hover:-translate-y-2 shadow-xl flex items-center gap-2">
+                    <span>Δείτε τα ακίνητα</span>
+                    <Search className="h-4 w-4" />
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
             
-            <Link to="/estimation" className="group relative w-full lg:w-1/2 rounded-3xl overflow-hidden h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500 z-10"></div>
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ανάθεση Ακινήτου" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
-                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 drop-shadow-lg transform group-hover:-translate-y-2 transition-transform duration-500">Ανάθεση Ακινήτου</h3>
-                <p className="text-white/90 text-lg md:text-xl font-medium mb-8 max-w-sm drop-shadow-md transform group-hover:-translate-y-2 transition-transform duration-500 delay-75 opacity-0 group-hover:opacity-100">Εμπιστευτείτε μας το ακίνητό σας για σίγουρη και γρήγορη πώληση.</p>
-                <div className="bg-white text-slate-900 group-hover:bg-gold group-hover:text-white px-8 py-3 rounded-full font-semibold transition-colors duration-300 transform group-hover:-translate-y-2 shadow-xl flex items-center gap-2">
-                  <span>Ζητήστε μία δωρεάν εκτίμηση</span>
-                  <HomeIcon className="h-4 w-4" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, delay: isMobile ? 0 : 0.2 }}
+              className="w-full lg:w-1/2"
+            >
+              <Link to="/estimation" className="group relative block w-full rounded-3xl overflow-hidden h-64 md:h-[28rem] shadow-sm hover:shadow-2xl transition-all duration-500">
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500 z-10"></div>
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ανάθεση Ακινήτου" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
+                  <h3 className="text-2xl md:text-4xl font-serif font-bold text-white mb-2 md:mb-4 drop-shadow-lg transform group-hover:-translate-y-2 transition-transform duration-500">Ανάθεση Ακινήτου</h3>
+                  <p className="text-white/90 text-sm md:text-xl font-medium mb-4 md:mb-8 max-w-sm drop-shadow-md transform group-hover:-translate-y-2 transition-transform duration-500 delay-75 opacity-0 group-hover:opacity-100">Εμπιστευτείτε μας το ακίνητό σας για σίγουρη και γρήγορη πώληση.</p>
+                  <div className="bg-white text-slate-900 group-hover:bg-gold group-hover:text-white px-6 md:px-8 py-2 md:py-3 rounded-full text-sm md:text-base font-semibold transition-colors duration-300 transform group-hover:-translate-y-2 shadow-xl flex items-center gap-2">
+                    <span>Ζητήστε μία δωρεάν εκτίμηση</span>
+                    <HomeIcon className="h-4 w-4" />
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* About / Features Section */}
-      <section id="about" className="pt-24 pb-12 md:py-24 bg-slate-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="about" className="pt-24 pb-12 md:py-24 bg-slate-50 relative overflow-hidden">
+        <BackgroundBlobs />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="flex flex-col lg:flex-row items-center gap-16 mb-0 md:mb-24">
             <motion.div 
@@ -449,55 +478,83 @@ const Home = () => {
       </section>
 
       {/* Top Areas Section */}
-      <section className="pt-12 pb-24 md:py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <section className="pt-12 pb-24 md:py-24 bg-white relative overflow-hidden">
+        <BackgroundBlobs />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl md:text-5xl font-serif font-semibold text-slate-900 mb-4">Δημοφιλείς Τοποθεσίες</h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto">Ανακαλύψτε επιλεγμένα ακίνητα στις πιο περιζήτητες περιοχές της Ελλάδας.</p>
-          </div>
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link to="/property" className="group relative rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
-              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Αθήνα Κέντρο" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
-                <div className="mb-4 lg:mb-0">
-                  <h3 className="text-2xl font-serif font-bold text-white mb-1">Αθήνα Κέντρο</h3>
-                  <p className="text-gold font-medium text-sm">450+ Ακίνητα</p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Link to="/property" className="group relative block rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Αθήνα Κέντρο" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
+                  <div className="mb-4 lg:mb-0">
+                    <h3 className="text-2xl font-serif font-bold text-white mb-1">Αθήνα Κέντρο</h3>
+                    <p className="text-gold font-medium text-sm">450+ Ακίνητα</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform md:translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+                    <Search className="h-5 w-5 text-white" />
+                  </div>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform md:translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
-                  <Search className="h-5 w-5 text-white" />
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
 
-            <Link to="/property" className="group relative rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
-              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Βόρεια Προάστια" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
-                <div className="mb-4 lg:mb-0">
-                  <h3 className="text-2xl font-serif font-bold text-white mb-1">Βόρεια Προάστια</h3>
-                  <p className="text-gold font-medium text-sm">210+ Ακίνητα</p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: isMobile ? 0 : 0.2 }}
+            >
+              <Link to="/property" className="group relative block rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Βόρεια Προάστια" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
+                  <div className="mb-4 lg:mb-0">
+                    <h3 className="text-2xl font-serif font-bold text-white mb-1">Βόρεια Προάστια</h3>
+                    <p className="text-gold font-medium text-sm">210+ Ακίνητα</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform md:translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+                    <Search className="h-5 w-5 text-white" />
+                  </div>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform md:translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
-                  <Search className="h-5 w-5 text-white" />
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
 
-            <Link to="/property" className="group relative rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
-              <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Νότια Προάστια" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
-                <div className="mb-4 lg:mb-0">
-                  <h3 className="text-2xl font-serif font-bold text-white mb-1">Νότια Προάστια</h3>
-                  <p className="text-gold font-medium text-sm">320+ Ακίνητα</p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: isMobile ? 0 : 0.4 }}
+            >
+              <Link to="/property" className="group relative block rounded-3xl overflow-hidden h-80 shadow-sm hover:shadow-xl transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Νότια Προάστια" className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end text-center lg:text-left">
+                  <div className="mb-4 lg:mb-0">
+                    <h3 className="text-2xl font-serif font-bold text-white mb-1">Νότια Προάστια</h3>
+                    <p className="text-gold font-medium text-sm">320+ Ακίνητα</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform md:translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+                    <Search className="h-5 w-5 text-white" />
+                  </div>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform md:translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
-                  <Search className="h-5 w-5 text-white" />
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -505,9 +562,16 @@ const Home = () => {
 
 
       {/* Insights Section */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end mb-16 text-center lg:text-left">
+      <section className="py-24 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
+        <BackgroundBlobs />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-end mb-16 text-center lg:text-left"
+          >
             <div className="mb-6 lg:mb-0">
               <span className="text-gold font-bold tracking-widest uppercase text-sm mb-2 block">Insights</span>
               <h2 className="text-4xl font-serif font-semibold text-slate-900">Νέα της Αγοράς</h2>
@@ -516,63 +580,84 @@ const Home = () => {
               Δείτε όλα τα άρθρα
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link to="/" className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-              <div className="relative h-60 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 1" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              </div>
-              <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
-                <p className="text-gold font-medium text-sm mb-3">Συμβουλές</p>
-                <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Πώς να αυξήσετε την αξία του ακινήτου σας πριν την πώληση</h3>
-                <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
-                  <span>Περισσότερα</span>
-                  <Plus className="ml-2 h-4 w-4" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Link to="/" className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-48 md:h-60 overflow-hidden shrink-0">
+                  <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 1" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
                 </div>
-              </div>
-            </Link>
+                <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
+                  <p className="text-gold font-medium text-sm mb-3">Συμβουλές</p>
+                  <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Πώς να αυξήσετε την αξία του ακινήτου σας πριν την πώληση</h3>
+                  <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
+                    <span>Περισσότερα</span>
+                    <Plus className="ml-2 h-4 w-4" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
 
-            <Link to="/" className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-              <div className="relative h-60 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 2" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              </div>
-              <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
-                <p className="text-gold font-medium text-sm mb-3">Αγορά Ακινήτων</p>
-                <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Τάσεις της αγοράς για το 2026: Τι πρέπει να γνωρίζετε</h3>
-                <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
-                  <span>Περισσότερα</span>
-                  <Plus className="ml-2 h-4 w-4" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: isMobile ? 0 : 0.2 }}
+            >
+              <Link to="/" className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-48 md:h-60 overflow-hidden shrink-0">
+                  <img src="https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 2" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
                 </div>
-              </div>
-            </Link>
+                <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
+                  <p className="text-gold font-medium text-sm mb-3">Αγορά Ακινήτων</p>
+                  <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Τάσεις της αγοράς για το 2026: Τι πρέπει να γνωρίζετε</h3>
+                  <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
+                    <span>Περισσότερα</span>
+                    <Plus className="ml-2 h-4 w-4" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
 
-            <Link to="/" className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-              <div className="relative h-60 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1626178793926-22b28830aa30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 3" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              </div>
-              <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
-                <p className="text-gold font-medium text-sm mb-3">Νομοθεσία</p>
-                <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Όλες οι αλλαγές στη φορολογία μεταβίβασης ακινήτων</h3>
-                <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
-                  <span>Περισσότερα</span>
-                  <Plus className="ml-2 h-4 w-4" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: isMobile ? 0 : 0.4 }}
+            >
+              <Link to="/" className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative h-48 md:h-60 overflow-hidden shrink-0">
+                  <img src="https://images.unsplash.com/photo-1626178793926-22b28830aa30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="News 3" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
                 </div>
-              </div>
-            </Link>
+                <div className="p-8 flex-grow flex flex-col text-center lg:text-left items-center lg:items-start">
+                  <p className="text-gold font-medium text-sm mb-3">Νομοθεσία</p>
+                  <h3 className="text-xl font-serif font-bold text-slate-900 mb-4 group-hover:text-gold transition-colors duration-300">Όλες οι αλλαγές στη φορολογία μεταβίβασης ακινήτων</h3>
+                  <div className="mt-auto flex items-center justify-center md:justify-start text-slate-500 font-medium w-full">
+                    <span>Περισσότερα</span>
+                    <Plus className="ml-2 h-4 w-4" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Unified CTA & Contact Section */}
-      <section id="contact" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
+      <section id="contact" className="py-10 lg:py-12 bg-[#0a0a0a] relative overflow-hidden min-h-[calc(100svh-80px)] flex flex-col justify-center">
         <ContactBackground />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           {/* CTA Block */}
-          <div className="text-center max-w-4xl mx-auto mb-24 pb-20 border-b border-white/10">
+          <div className="text-center max-w-4xl mx-auto mb-10 pb-8 lg:pb-10 border-b border-white/10">
             <span className="text-gold text-sm font-bold tracking-[0.3em] uppercase mb-4 block">Το Επομενο Βημα</span>
-            <h2 className="text-4xl md:text-6xl font-serif font-light mb-8 text-white leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-light mb-8 text-white leading-tight">
               Ανακαλύψτε την αξία του <br className="hidden md:block"/><span className="font-semibold text-gold italic">ακινήτου σας</span> σήμερα.
             </h2>
             <Link to="/estimation" className="inline-flex items-center justify-center bg-gold text-white hover:bg-white hover:text-black px-10 py-4 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-500 shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)]">
@@ -582,7 +667,7 @@ const Home = () => {
           </div>
           
           {/* Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 mb-10">
             
             {/* Brand & Address */}
             <div className="md:col-span-4">
@@ -653,7 +738,7 @@ const Home = () => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light text-white/40">
+          <div className="pt-6 lg:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light text-white/40">
             <p>&copy; {new Date().getFullYear()} Esthete Luxury Real Estate. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link to="/" className="hover:text-gold transition-colors">Όροι Χρήσης</Link>

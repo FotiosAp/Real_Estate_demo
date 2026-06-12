@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useNavigationType, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Bed, Bath, Square, ArrowLeft, CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
+import { MapPin, Bed, Bath, Square, ArrowLeft, CheckCircle2, ChevronRight, ChevronLeft, Home } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
 const PropertyDetails = () => {
@@ -168,6 +168,10 @@ const PropertyDetails = () => {
 
               {/* Key Features Bar */}
               <div className="flex flex-wrap items-center gap-6 py-6 border-y border-slate-200 mb-8">
+                <div className="flex items-center text-slate-700">
+                  <Home className="h-6 w-6 mr-3 text-slate-400" />
+                  <span className="text-lg font-medium">{property.type}</span>
+                </div>
                 <div className="flex items-center text-slate-700">
                   <Bed className="h-6 w-6 mr-3 text-slate-400" />
                   <span className="text-lg font-medium">{property.bedrooms} <span className="text-slate-500 font-normal">Υπνοδωμάτια</span></span>

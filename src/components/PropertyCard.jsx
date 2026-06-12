@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bed, Bath, Square, MapPin } from 'lucide-react';
+import { Bed, Bath, Square, MapPin, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PropertyCard = ({ property }) => {
@@ -43,16 +43,20 @@ const PropertyCard = ({ property }) => {
             <span className="truncate">{property.location}</span>
           </div>
           
-          <div className="flex items-center justify-between pt-5 border-t border-slate-100 text-slate-600">
-            <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-between pt-5 border-t border-slate-100 text-slate-600 flex-wrap gap-y-2 gap-x-3">
+            <div className="flex items-center space-x-1.5">
+              <Home className="h-4 w-4 text-slate-400" />
+              <span className="text-sm font-medium">{property.type}</span>
+            </div>
+            <div className="flex items-center space-x-1.5">
               <Bed className="h-4 w-4 text-slate-400" />
-              <span className="text-sm font-medium">{property.bedrooms} <span className="hidden sm:inline">Υπν.</span></span>
+              <span className="text-sm font-medium">{property.bedrooms} <span className="hidden xl:inline">Υπν.</span></span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1.5">
               <Bath className="h-4 w-4 text-slate-400" />
-              <span className="text-sm font-medium">{property.bathrooms} <span className="hidden sm:inline">Μπάνια</span></span>
+              <span className="text-sm font-medium">{property.bathrooms} <span className="hidden xl:inline">Μπ.</span></span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1.5">
               <Square className="h-4 w-4 text-slate-400" />
               <span className="text-sm font-medium">{property.sqft} τ.μ.</span>
             </div>

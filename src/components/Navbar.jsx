@@ -71,10 +71,10 @@ const Navbar = () => {
           </div>
           
           {/* Right Side - Empty on desktop, Hamburger on mobile */}
-          <div className="flex-1 flex justify-end">
+          <div className="absolute right-2 md:relative md:right-auto md:flex-1 flex justify-end">
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden z-50 p-2 -mr-2 text-current"
+              className="md:hidden z-50 p-2 text-current"
             >
               {mobileMenuOpen ? (
                 <X className={`h-6 w-6 transition-colors duration-500 text-black`} />
