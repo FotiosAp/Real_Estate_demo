@@ -264,19 +264,23 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden w-full max-w-sm mx-auto mt-8 relative z-20 px-4"
           >
-            <button
-              onClick={() => navigate('/properties')}
-              className="w-full bg-white/95 backdrop-blur-md px-6 py-4 rounded-full flex items-center shadow-[0_8px_30px_rgb(0,0,0,0.12)] active:scale-95 transition-transform border border-white/40"
-            >
-              <Search className="h-5 w-5 text-slate-400 mr-4 shrink-0" />
-              <div className="flex flex-col items-start flex-1 text-left">
-                <span className="text-slate-900 font-bold text-[15px] leading-tight">Αναζήτηση</span>
-                <span className="text-slate-500 text-[11px] font-medium mt-0.5">Περιοχή, Τιμή, Εμβαδόν...</span>
-              </div>
-              <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center shrink-0 ml-2">
-                <ArrowRight className="h-4 w-4 text-slate-600" />
-              </div>
-            </button>
+            <div className="w-full bg-white/95 backdrop-blur-md px-4 py-2 rounded-full flex items-center shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/40">
+              <Search className="h-5 w-5 text-slate-400 mr-3 shrink-0" />
+              <input
+                type="text"
+                placeholder="Αναζήτηση (Περιοχή, Τιμή...)"
+                className="w-full bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 font-medium text-[15px] py-3"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') navigate('/properties');
+                }}
+              />
+              <button 
+                onClick={() => navigate('/properties')}
+                className="w-10 h-10 rounded-full bg-black flex items-center justify-center shrink-0 ml-2 hover:bg-gold transition-colors shadow-md"
+              >
+                <ArrowRight className="h-4 w-4 text-white" />
+              </button>
+            </div>
           </motion.div>
         </motion.div>
         
