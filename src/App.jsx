@@ -13,7 +13,7 @@ function App() {
   const isEstimationPage = location.pathname === '/estimation';
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen relative w-full max-w-[100vw] overflow-x-hidden">
       <Navbar />
       <main className="flex-grow">
         <Routes>
