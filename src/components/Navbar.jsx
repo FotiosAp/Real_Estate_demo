@@ -45,15 +45,19 @@ const Navbar = () => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 border-b ${isSolid ? 'bg-white/90 backdrop-blur-md border-slate-200 shadow-sm py-2' : 'bg-transparent border-transparent py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link to="/" onClick={() => { sessionStorage.removeItem('homeScroll'); window.scrollTo(0,0); setMobileMenuOpen(false); }} className="flex items-center space-x-2 group z-50">
-            <Building2 className={`h-8 w-8 transition-colors duration-500 ${(isSolid || mobileMenuOpen) ? 'text-black' : 'text-white'}`} />
-            <span className={`font-serif text-2xl font-semibold tracking-tight transition-colors duration-500 ${(isSolid || mobileMenuOpen) ? 'text-black' : 'text-white'}`}>
-              Esthete.
-            </span>
-          </Link>
+        <div className="flex items-center justify-between h-16 relative w-full">
+          {/* Left Side - Logo */}
+          <div className="flex-1 flex justify-start">
+            <Link to="/" onClick={() => { sessionStorage.removeItem('homeScroll'); window.scrollTo(0,0); setMobileMenuOpen(false); }} className="flex items-center space-x-2 group z-50">
+              <Building2 className={`h-8 w-8 transition-colors duration-500 ${(isSolid || mobileMenuOpen) ? 'text-black' : 'text-white'}`} />
+              <span className={`font-serif text-2xl font-semibold tracking-tight transition-colors duration-500 ${(isSolid || mobileMenuOpen) ? 'text-black' : 'text-white'}`}>
+                Esthete.
+              </span>
+            </Link>
+          </div>
           
-          <div className="hidden md:flex space-x-10">
+          {/* Center - Nav Items */}
+          <div className="hidden md:flex space-x-10 flex-none justify-center">
             {navItems.map((item) => (
               <button 
                 key={item.name} 
@@ -66,24 +70,19 @@ const Navbar = () => {
             ))}
           </div>
           
-          <button 
-            onClick={() => handleNavClick('contact')}
-            className={`hidden md:block px-6 py-2.5 rounded-full font-medium transition-all duration-500 shadow-lg hover:-translate-y-0.5 ${isSolid ? 'bg-black text-white hover:bg-slate-800' : 'bg-white text-black hover:bg-white/90'}`}
-          >
-            Εκδήλωση Ενδιαφέροντος
-          </button>
-
-          {/* Mobile Menu Toggle */}
-          <button 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden z-50 p-2 -mr-2 text-current"
-          >
-            {mobileMenuOpen ? (
-              <X className={`h-6 w-6 transition-colors duration-500 text-black`} />
-            ) : (
-              <Menu className={`h-6 w-6 transition-colors duration-500 ${isSolid ? 'text-black' : 'text-white'}`} />
-            )}
-          </button>
+          {/* Right Side - Empty on desktop, Hamburger on mobile */}
+          <div className="flex-1 flex justify-end">
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden z-50 p-2 -mr-2 text-current"
+            >
+              {mobileMenuOpen ? (
+                <X className={`h-6 w-6 transition-colors duration-500 text-black`} />
+              ) : (
+                <Menu className={`h-6 w-6 transition-colors duration-500 ${isSolid ? 'text-black' : 'text-white'}`} />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
