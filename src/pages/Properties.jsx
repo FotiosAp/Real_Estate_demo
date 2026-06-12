@@ -179,7 +179,6 @@ const Properties = () => {
                     { value: 'Διαμέρισμα', label: 'Διαμέρισμα' },
                     { value: 'Ρετιρέ', label: 'Ρετιρέ' },
                     { value: 'Μονοκατοικία', label: 'Μονοκατοικία' },
-                    { value: 'Οροφοδιαμέρισμα', label: 'Οροφοδιαμέρισμα' },
                     { value: 'Loft', label: 'Loft' },
                     { value: 'Studio', label: 'Studio' }
                   ]}

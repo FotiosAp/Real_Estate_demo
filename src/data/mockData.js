@@ -85,7 +85,7 @@ export const initialProperties = [
     bedrooms: 3,
     bathrooms: 2,
     sqft: 145,
-    type: "Οροφοδιαμέρισμα",
+    type: "Loft",
     images: getImages(4),
     coordinates: [37.9682, 23.7441],
     description: "Ένα φωτεινό και άνετο οικογενειακό διαμέρισμα στο πολυσύχναστο Παγκράτι. Διαθέτει ευρύχωρο σαλόνι, αναβαθμισμένη κουζίνα και πολλές αποθηκευτικές λύσεις.",
