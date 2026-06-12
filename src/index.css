@@ -18,6 +18,10 @@
 }
 
 @layer base {
+  html, body {
+    overflow-x: hidden;
+  }
+  
   body {
     @apply bg-background text-text font-sans antialiased selection:bg-gold/30;
   }

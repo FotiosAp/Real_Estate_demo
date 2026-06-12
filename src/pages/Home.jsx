@@ -70,10 +70,6 @@ const Home = () => {
     navigate(`/properties?${params.toString()}`);
   };
   
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 1000], [0, 300]);
-  const opacity1 = useTransform(scrollY, [0, 500], [1, 0]);
-
   const navType = useNavigationType();
 
   useEffect(() => {
@@ -113,7 +109,7 @@ const Home = () => {
     <div className="min-h-screen">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         
-        <motion.div style={{ y: y1 }} className="absolute inset-0 z-0 bg-black">
+        <motion.div className="absolute inset-0 z-0 bg-black">
           <AnimatePresence>
             {properties.length > 0 && (
               <motion.img 
@@ -131,7 +127,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/60"></div>
         </motion.div>
         
-        <motion.div style={{ opacity: opacity1 }} className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+        <motion.div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
